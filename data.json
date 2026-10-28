@@ -32,5 +32,25 @@
     "source": "Launch snapshot",
     "live": false
   },
-  "updated_at": "2026-10-28T11:03:26+00:00"
+  "updated_at": "2026-10-28T11:07:42+00:00",
+  "marketing": {
+    "campaigns": [
+      {
+        "id": "2026-10-28-signup-fixed",
+        "subject": "Trampu sign-up is fixed. Try again in one minute",
+        "cta_url": "https://trampu.online/?utm_source=email&utm_medium=email&utm_campaign=2026-10-28-signup-fixed",
+        "sent": false,
+        "clicked": 0,
+        "joined": 0
+      }
+    ],
+    "funnel_definition": [
+      "email audience",
+      "delivered",
+      "opened",
+      "clicked",
+      "joined"
+    ],
+    "attribution": "UTM-tagged campaign links; website visits are intentionally not inferred from email clicks."
+  }
 }
