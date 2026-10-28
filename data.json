@@ -1,12 +1,27 @@
 {
   "trampu": {
     "roster": 278,
-    "joined": 0,
-    "offers_open": 0,
-    "trips_total": 0,
-    "destinations": []
+    "joined": 10,
+    "offers_open": 6,
+    "trips_total": 5,
+    "destinations": [
+      "Kira",
+      "Ntinda",
+      "Entebbe",
+      "Kawempe",
+      "Najjera",
+      "Kololo",
+      "Bukoto",
+      "Naalya",
+      "Wandegeya",
+      "Bweyogerere",
+      "Kyaliwajjala",
+      "Nansana",
+      "Mukono",
+      "Namugongo"
+    ]
   },
-  "trampu_ok": false,
+  "trampu_ok": true,
   "email": {
     "audience": 205,
     "delivered": 200,
@@ -17,5 +32,5 @@
     "source": "Launch snapshot",
     "live": false
   },
-  "updated_at": "2026-10-28T09:15:00Z"
+  "updated_at": "2026-10-28T09:38:52+00:00"
 }
