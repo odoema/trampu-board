@@ -1,0 +1,9 @@
+[
+  {
+    "id": "2026-10-28-signup-fixed",
+    "subject": "Trampu sign-up is fixed. Try again in one minute",
+    "cta_url": "https://trampu.online/?utm_source=email&utm_medium=email&utm_campaign=2026-10-28-signup-fixed",
+    "sent": false,
+    "notes": "Signup repair campaign. Mark sent=true after the Resend broadcast is actually sent."
+  }
+]
