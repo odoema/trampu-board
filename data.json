@@ -1,9 +1,9 @@
 {
   "trampu": {
     "roster": 278,
-    "joined": 11,
+    "joined": 14,
     "offers_open": 6,
-    "trips_total": 5,
+    "trips_total": 6,
     "destinations": [
       "Kira",
       "Ntinda",
@@ -32,25 +32,32 @@
     "source": "Launch snapshot",
     "live": false
   },
-  "updated_at": "2026-10-28T11:07:42+00:00",
+  "updated_at": "2026-10-28T12:22:56+00:00",
   "marketing": {
     "campaigns": [
       {
-        "id": "2026-10-28-signup-fixed",
+        "id": "",
         "subject": "Trampu sign-up is fixed. Try again in one minute",
         "cta_url": "https://trampu.online/?utm_source=email&utm_medium=email&utm_campaign=2026-10-28-signup-fixed",
+        "broadcast_id": "",
+        "status": "ready",
         "sent": false,
+        "sent_count": 0,
+        "delivered": 0,
+        "opened": 0,
         "clicked": 0,
+        "unique_clicked": 0,
         "joined": 0
       }
     ],
     "funnel_definition": [
-      "email audience",
+      "email sends",
       "delivered",
       "opened",
       "clicked",
       "joined"
     ],
-    "attribution": "UTM-tagged campaign links; website visits are intentionally not inferred from email clicks."
+    "attribution": "UTM-tagged campaign links; website visits are intentionally not inferred from email clicks.",
+    "metrics_source": "Resend Email Metrics API"
   }
 }
