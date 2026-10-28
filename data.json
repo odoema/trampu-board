@@ -1,8 +1,8 @@
 {
   "trampu": {
     "roster": 278,
-    "joined": 19,
-    "offers_open": 5,
+    "joined": 20,
+    "offers_open": 6,
     "trips_total": 7,
     "destinations": [
       "Kira",
@@ -67,7 +67,7 @@
       }
     ]
   },
-  "updated_at": "2026-10-28T16:37:52+00:00",
+  "updated_at": "2026-10-28T21:39:28+00:00",
   "marketing": {
     "campaigns": [
       {
