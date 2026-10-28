@@ -5,8 +5,6 @@ on:
   schedule:
     - cron: "17 * * * *"
   workflow_dispatch:
-  push:
-    branches: [main]
 
 permissions:
   contents: write
@@ -33,12 +31,16 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: python3 scripts/update.py
 
-      - name: Save history
+      - name: Save history and publish data
         run: |
           git config user.name "trampu-board"
           git config user.email "trampu-board@users.noreply.github.com"
           git add data.json history.json logo.png 2>/dev/null || git add data.json history.json
-          git diff --cached --quiet || git commit -m "data: hourly update" && git push
+          if ! git diff --cached --quiet; then
+            git commit -m "data: hourly update"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
 
       - name: Build site
         run: |
