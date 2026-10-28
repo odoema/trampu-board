@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trampu Launch Board</title>
+<meta name="description" content="Live progress of Trampu, student-to-student ride sharing for Makerere MBA 2026/27. Same campus. Same direction. Better together.">
+<meta property="og:title" content="Trampu Launch Board">
+<meta property="og:description" content="How many classmates have joined Trampu, rides on offer and trips so far. Updated every hour.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: navy hero band with the headline number, then a stat row, a trend chart beside routes, and a launch timeline. */
+:root {
+  --navy: #002958;
+  --navy-2: #0b3b73;
+  --green: #03B721;
+  --green-soft: #e3f7e7;
+  --bg: #f3f6fa;
+  --card: #ffffff;
+  --fg: #0d1d33;
+  --muted: #5a6b82;
+  --line: #dbe3ee;
+  --on-navy: #ffffff;
+  --on-navy-muted: #b9c8dc;
+  --display: "Archivo", "Arial Narrow", Arial, sans-serif;
+  --body: "Public Sans", "Segoe UI", Roboto, sans-serif;
+  --mono: "JetBrains Mono", Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #07111f; --card: #0e1c30; --fg: #e7eef8; --muted: #9db0c8; --line: #1d3150;
+    --green-soft: #0f3320; --navy: #001a3a; --navy-2: #0a2c57; color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--fg); font: 16px/1.5 var(--body); -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* hero */
+.hero { background: radial-gradient(1200px 400px at 85% -10%, var(--navy-2), transparent 60%), var(--navy); color: var(--on-navy); padding-block: 28px 40px; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; font: 800 1.35rem var(--display); letter-spacing: -0.01em; }
+.brand img { width: 40px; height: 40px; border-radius: 10px; background: #fff; object-fit: contain; padding: 3px; }
+.brand b { color: var(--green); font-weight: 800; }
+.live { display: inline-flex; align-items: center; gap: 8px; font: 500 0.78rem var(--mono); color: var(--on-navy-muted); border: 1px solid rgba(255,255,255,.18); border-radius: 999px; padding: 5px 12px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(3,183,33,.6); animation: pulse 2s infinite; }
+.dot.stale { background: #f2a93b; animation: none; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(3,183,33,0); } 100% { box-shadow: 0 0 0 0 rgba(3,183,33,0); } }
+.headline { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 32px; align-items: end; margin-top: 36px; }
+.eyebrow { font: 600 0.78rem var(--body); text-transform: uppercase; letter-spacing: .12em; color: var(--green); margin: 0 0 8px; }
+h1 { font: 800 clamp(2.4rem, 7vw, 4.6rem)/0.95 var(--display); letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
+h1 .of { color: var(--on-navy-muted); font-weight: 700; }
+.lede { color: var(--on-navy-muted); margin: 14px 0 0; max-width: 46ch; }
+.meter { background: rgba(255,255,255,.12); border-radius: 999px; height: 14px; overflow: hidden; }
+.meter i { display: block; height: 100%; width: 0; background: var(--green); border-radius: 999px; transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
+.meter-label { display: flex; justify-content: space-between; font: 500 .8rem var(--mono); color: var(--on-navy-muted); margin-top: 8px; }
+.cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; background: var(--green); color: #fff; font: 700 1rem var(--display); text-decoration: none; padding: 12px 20px; border-radius: 12px; }
+.cta:hover { filter: brightness(1.08); }
+.cta:focus-visible, a:focus-visible { outline: 3px solid #9be7a8; outline-offset: 3px; }
+
+/* body */
+main { padding-block: 0 48px; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: -22px; }
+.stat { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px 18px 16px; }
+.stat h2 { font: 600 .74rem var(--body); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 0; }
+.stat .n { font: 800 2.4rem/1.1 var(--display); letter-spacing: -0.02em; margin-top: 6px; font-variant-numeric: tabular-nums; }
+.stat p { margin: 4px 0 0; color: var(--muted); font-size: .88rem; }
+.grid2 { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 14px; margin-top: 14px; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px; min-width: 0; }
+.panel h3 { font: 700 1.05rem var(--display); margin: 0 0 4px; }
+.panel .sub { color: var(--muted); font-size: .86rem; margin: 0 0 14px; }
+.chart { width: 100%; height: 220px; display: block; }
+.chart text { fill: var(--muted); font: 500 11px var(--mono); }
+.empty { color: var(--muted); font-size: .9rem; padding: 40px 0; text-align: center; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { background: var(--green-soft); color: var(--fg); border-radius: 999px; padding: 6px 12px; font-size: .86rem; font-weight: 500; }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.timeline li { display: grid; grid-template-columns: 92px 18px minmax(0, 1fr); gap: 12px; align-items: start; padding-bottom: 18px; position: relative; }
+.timeline time { font: 500 .8rem var(--mono); color: var(--muted); padding-top: 2px; }
+.timeline .pin { width: 12px; height: 12px; border-radius: 50%; border: 3px solid var(--green); background: var(--card); margin-top: 5px; position: relative; z-index: 1; }
+.timeline li:not(:last-child)::after { content: ""; position: absolute; left: calc(92px + 12px + 5px); top: 18px; bottom: 0; width: 2px; background: var(--line); }
+.timeline b { font-family: var(--display); }
+.timeline span { color: var(--muted); display: block; font-size: .9rem; }
+footer { color: var(--muted); font-size: .82rem; padding-block: 0 32px; }
+footer a { color: inherit; }
+
+@media (max-width: 860px) {
+  .headline, .grid2 { grid-template-columns: minmax(0, 1fr); }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) { .dot { animation: none; } .meter i { transition: none; } }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="top">
+      <div class="brand"><img src="logo.png" alt="" onerror="this.remove()"><span>Tram<b>pu</b></span></div>
+      <span class="live"><span class="dot" id="dot"></span><span id="updated">Loading latest numbers…</span></span>
+    </div>
+    <div class="headline">
+      <div>
+        <p class="eyebrow">Makerere MBA 2026/27 · Pilot</p>
+        <h1><span id="joined">–</span> <span class="of">of <span id="roster">278</span> classmates are on Trampu</span></h1>
+        <p class="lede">Every weeknight at 9:30 pm, nearly 280 of us leave CTF-2 and FEMA at the same time. Some drive home with empty seats. Trampu connects the two.</p>
+        <a class="cta" href="https://trampu.online">Join Trampu →</a>
+      </div>
+      <div>
+        <div class="meter" role="progressbar" aria-label="Share of class joined" aria-valuemin="0" aria-valuemax="100" id="meterbar"><i id="meter"></i></div>
+        <div class="meter-label"><span id="pct">0% of the class</span><span>Goal: whole class</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="stats" aria-label="Key numbers">
+    <div class="stat"><h2>Classmates joined</h2><div class="n" id="s-joined">–</div><p>verified against the class roster</p></div>
+    <div class="stat"><h2>Rides on offer</h2><div class="n" id="s-offers">–</div><p>open seats posted right now</p></div>
+    <div class="stat"><h2>Trips so far</h2><div class="n" id="s-trips">–</div><p>lifts requested between classmates</p></div>
+    <div class="stat"><h2>Invites delivered</h2><div class="n" id="s-email">–</div><p id="s-email-sub">launch email, 27 Oct</p></div>
+  </section>
+
+  <section class="grid2">
+    <div class="panel">
+      <h3>Classmates joining over time</h3>
+      <p class="sub">Total members, refreshed every hour</p>
+      <div id="chart"><div class="empty">The trend appears after the first few hourly updates.</div></div>
+    </div>
+    <div class="panel">
+      <h3>Where we're heading</h3>
+      <p class="sub">Neighbourhoods classmates can offer lifts to</p>
+      <div class="chips" id="routes"><span class="chip">Bukoto</span><span class="chip">Ntinda</span><span class="chip">Bwaise</span><span class="chip">Bugolobi</span><span class="chip">Nansana</span></div>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:14px">
+    <h3>Launch timeline</h3>
+    <p class="sub">From idea to live pilot</p>
+    <ol class="timeline">
+      <li><time>17 Aug 2026</time><span class="pin"></span><div><b>Trampu is named</b><span>Student Lift became TravelBuddy, then Trampu.</span></div></li>
+      <li><time>24 Aug 2026</time><span class="pin"></span><div><b>trampu.online goes online</b><span>The pilot app is deployed, with sign-up checked against the class roster.</span></div></li>
+      <li><time>27 Oct 2026</time><span class="pin"></span><div><b>Launch email</b><span>"Class is out. Who's going your way?" sent to the class.</span></div></li>
+      <li><time>28 Oct 2026</time><span class="pin"></span><div><b>Faster updates</b><span>Improvements now reach the app automatically, within minutes.</span></div></li>
+    </ol>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p>Same campus. Same direction. Better together. · Numbers come from <a href="https://trampu.online">trampu.online</a> and update every hour. Only totals are shown; no names, phone numbers or emails.</p>
+</footer>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var fmt = function (n) { return (n == null || isNaN(n)) ? "–" : Number(n).toLocaleString("en-UG"); };
+
+  function when(iso) {
+    var d = new Date(iso);
+    if (isNaN(d)) return null;
+    var mins = Math.round((Date.now() - d) / 60000);
+    var ago = mins < 2 ? "just now" : mins < 90 ? mins + " min ago" : Math.round(mins / 60) + " h ago";
+    var t = d.toLocaleString("en-GB", { timeZone: "Africa/Kampala", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+    return { text: "Updated " + ago + " · " + t + " EAT", stale: mins > 180 };
+  }
+
+  function render(data) {
+    var t = data.trampu || {}, e = data.email || {};
+    var roster = t.roster || 278, joined = t.joined || 0;
+    var pct = roster ? Math.min(100, Math.round(joined / roster * 100)) : 0;
+    $("joined").textContent = fmt(joined);
+    $("roster").textContent = fmt(roster);
+    $("s-joined").textContent = fmt(joined);
+    $("s-offers").textContent = fmt(t.offers_open);
+    $("s-trips").textContent = fmt(t.trips_total);
+    $("pct").textContent = pct + "% of the class";
+    $("meterbar").setAttribute("aria-valuenow", pct);
+    requestAnimationFrame(function () { $("meter").style.width = Math.max(pct, joined ? 2 : 0) + "%"; });
+    if (e.delivered != null) {
+      $("s-email").textContent = fmt(e.delivered);
+      var rate = e.audience ? Math.round(e.delivered / e.audience * 100) : null;
+      $("s-email-sub").textContent = (rate != null ? rate + "% of " + fmt(e.audience) + " classmates reached" : "launch email") + (e.live ? "" : " · 27 Oct");
+    }
+    if (t.destinations && t.destinations.length) {
+      $("routes").innerHTML = "";
+      t.destinations.forEach(function (d) { var s = document.createElement("span"); s.className = "chip"; s.textContent = d; $("routes").appendChild(s); });
+    }
+    var w = when(data.updated_at);
+    if (w) { $("updated").textContent = w.text; $("dot").classList.toggle("stale", w.stale); }
+  }
+
+  function chart(history) {
+    var pts = (history || []).filter(function (p) { return p && p.t; });
+    if (pts.length < 2) return;
+    var W = Math.max(300, Math.round(($("chart").clientWidth || 640))), H = 220, L = 34, R = 12, T = 14, B = 26;
+    var xs = pts.map(function (p) { return +new Date(p.t); });
+    var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs) || x0 + 1;
+    var maxY = Math.max(10, Math.max.apply(null, pts.map(function (p) { return p.joined || 0; })));
+    var step = Math.pow(10, Math.floor(Math.log10(maxY))); maxY = Math.ceil(maxY / step) * step;
+    var X = function (v) { return L + (v - x0) / ((x1 - x0) || 1) * (W - L - R); };
+    var Y = function (v) { return T + (1 - v / maxY) * (H - T - B); };
+    var d = pts.map(function (p, i) { return (i ? "L" : "M") + X(+new Date(p.t)).toFixed(1) + " " + Y(p.joined || 0).toFixed(1); }).join(" ");
+    var area = d + " L" + X(x1).toFixed(1) + " " + Y(0) + " L" + X(x0).toFixed(1) + " " + Y(0) + " Z";
+    var grid = "";
+    for (var i = 0; i <= 4; i++) {
+      var v = maxY * i / 4, y = Y(v).toFixed(1);
+      grid += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y + '" y2="' + y + '" stroke="var(--line)" stroke-width="1"/>' +
+              '<text x="' + (L - 8) + '" y="' + (+y + 4) + '" text-anchor="end">' + Math.round(v) + '</text>';
+    }
+    var fmtD = function (ms) { return new Date(ms).toLocaleDateString("en-GB", { timeZone: "Africa/Kampala", day: "numeric", month: "short" }); };
+    var last = pts[pts.length - 1];
+    $("chart").innerHTML =
+      '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Classmates joined over time, now ' + (last.joined || 0) + '">' +
+      '<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#03B721" stop-opacity=".28"/><stop offset="1" stop-color="#03B721" stop-opacity="0"/></linearGradient></defs>' +
+      grid +
+      '<path d="' + area + '" fill="url(#g)"/>' +
+      '<path d="' + d + '" fill="none" stroke="#03B721" stroke-width="2.5" stroke-linejoin="round"/>' +
+      '<circle cx="' + X(+new Date(last.t)).toFixed(1) + '" cy="' + Y(last.joined || 0).toFixed(1) + '" r="5" fill="#03B721" stroke="var(--card)" stroke-width="2"/>' +
+      '<text x="' + L + '" y="' + (H - 6) + '">' + fmtD(x0) + '</text>' +
+      '<text x="' + (W - R) + '" y="' + (H - 6) + '" text-anchor="end">' + fmtD(x1) + '</text>' +
+      '</svg>';
+  }
+
+  var bust = "?v=" + Date.now();
+  fetch("data.json" + bust).then(function (r) { return r.json(); }).then(render)
+    .catch(function () { $("updated").textContent = "Live numbers unavailable right now"; $("dot").classList.add("stale"); });
+  fetch("history.json" + bust).then(function (r) { return r.json(); }).then(chart).catch(function () {});
+})();
+</script>
+</body>
+</html>
