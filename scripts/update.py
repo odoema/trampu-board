@@ -1,9 +1,10 @@
-"""Refresh the Trampu public board data.
+"""Refresh the Trampu sales and marketing dashboard data.
 
-Runs hourly in GitHub Actions. Uses only aggregate numbers:
-  * trampu.online/api/health -> roster size, classmates joined, open offers, trips
-  * Resend API -> email delivery/open/click counts
-  * GitHub traffic API -> public repository views as a fallback board-traffic metric
+Publishes aggregate numbers only:
+  * trampu.online/api/health -> roster, joined, open offers, trips
+  * Resend -> sender delivery/open/click totals
+  * GitHub traffic -> board visits
+  * campaigns.json -> safe campaign catalogue used by the dashboard
 Never writes names, emails or phone numbers.
 """
 import datetime as dt
@@ -15,6 +16,7 @@ import urllib.request
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "data.json"
 HISTORY = ROOT / "history.json"
+CAMPAIGNS = ROOT / "campaigns.json"
 LOGO = ROOT / "logo.png"
 HEALTH_URL = os.environ.get("TRAMPU_HEALTH_URL", "https://trampu.online/api/health")
 SENDER = os.environ.get("TRAMPU_SENDER", "trampu@").lower()
@@ -22,7 +24,7 @@ GITHUB_REPO = os.environ.get("GITHUB_REPOSITORY", "odoema/trampu-board")
 
 
 def get_json(url, headers=None, timeout=20):
-    req = urllib.request.Request(url, headers={"User-Agent": "trampu-board/1.0", **(headers or {})})
+    req = urllib.request.Request(url, headers={"User-Agent": "trampu-board/1.1", **(headers or {})})
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return json.loads(r.read())
 
@@ -87,6 +89,25 @@ def github_views(token):
     }
 
 
+def campaign_catalog(email, joined):
+    rows = load(CAMPAIGNS, [])
+    if not isinstance(rows, list):
+        return []
+    result = []
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        result.append({
+            "id": str(row.get("id") or ""),
+            "subject": str(row.get("subject") or ""),
+            "cta_url": str(row.get("cta_url") or ""),
+            "sent": bool(row.get("sent")),
+            "clicked": int(email.get("clicked") or 0) if row.get("sent") else 0,
+            "joined": int(joined or 0) if row.get("sent") else 0,
+        })
+    return result
+
+
 def main():
     now = dt.datetime.now(dt.timezone.utc).replace(microsecond=0)
     data = load(DATA, {})
@@ -115,6 +136,11 @@ def main():
     except Exception as e:
         print("GitHub traffic unavailable, keeping last board snapshot:", e)
 
+    data["marketing"] = {
+        "campaigns": campaign_catalog(data.get("email", {}), data.get("trampu", {}).get("joined", 0)),
+        "funnel_definition": ["email audience", "delivered", "opened", "clicked", "joined"],
+        "attribution": "UTM-tagged campaign links; website visits are intentionally not inferred from email clicks.",
+    }
     data["updated_at"] = now.isoformat()
     DATA.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
@@ -122,14 +148,13 @@ def main():
     if t and data.get("trampu_ok"):
         point = {"t": now.isoformat(), "joined": t["joined"], "offers_open": t["offers_open"], "trips_total": t["trips_total"]}
         last = history[-1] if history else None
-        if not last or any(last.get(k) != point[k] for k in ("joined", "offers_open", "trips_total")) \
-                or dt.datetime.fromisoformat(last["t"]).date() != now.date():
+        if not last or any(last.get(k) != point[k] for k in ("joined", "offers_open", "trips_total")) or dt.datetime.fromisoformat(last["t"]).date() != now.date():
             history.append(point)
         HISTORY.write_text(json.dumps(history[-2000:], indent=1) + "\n", encoding="utf-8")
 
     if not LOGO.exists():
         try:
-            req = urllib.request.Request("https://trampu.online/static/logo.png", headers={"User-Agent": "trampu-board/1.0"})
+            req = urllib.request.Request("https://trampu.online/static/logo.png", headers={"User-Agent": "trampu-board/1.1"})
             with urllib.request.urlopen(req, timeout=20) as r:
                 LOGO.write_bytes(r.read())
         except Exception as e:
