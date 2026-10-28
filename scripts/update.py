@@ -1,8 +1,9 @@
 """Refresh the Trampu public board data.
 
 Runs hourly in GitHub Actions. Uses only aggregate numbers:
-  * trampu.online/api/health  -> roster size, classmates joined, open offers, trips
-  * Resend API (optional)     -> launch email delivery counts
+  * trampu.online/api/health -> roster size, classmates joined, open offers, trips
+  * Resend API -> email delivery/open/click counts
+  * GitHub traffic API -> public repository views as a fallback board-traffic metric
 Never writes names, emails or phone numbers.
 """
 import datetime as dt
@@ -17,6 +18,7 @@ HISTORY = ROOT / "history.json"
 LOGO = ROOT / "logo.png"
 HEALTH_URL = os.environ.get("TRAMPU_HEALTH_URL", "https://trampu.online/api/health")
 SENDER = os.environ.get("TRAMPU_SENDER", "trampu@").lower()
+GITHUB_REPO = os.environ.get("GITHUB_REPOSITORY", "odoema/trampu-board")
 
 
 def get_json(url, headers=None, timeout=20):
@@ -46,7 +48,6 @@ def trampu_stats():
 def resend_stats(key):
     counts = {"audience": 0, "delivered": 0, "bounced": 0, "opened": 0, "clicked": 0}
     url = "https://api.resend.com/emails?limit=100"
-    seen = 0
     for _ in range(50):
         page = get_json(url, {"Authorization": f"Bearer {key}"})
         rows = page.get("data") or []
@@ -63,11 +64,27 @@ def resend_stats(key):
                 counts["clicked"] += 1
             if ev == "bounced":
                 counts["bounced"] += 1
-        seen += len(rows)
         if not page.get("has_more") or not rows:
             break
         url = f"https://api.resend.com/emails?limit=100&after={rows[-1]['id']}"
     return counts if counts["audience"] else None
+
+
+def github_views(token):
+    if not token:
+        return None
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/traffic/views"
+    data = get_json(url, {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+    })
+    return {
+        "views_14d": int(data.get("count") or 0),
+        "unique_views_14d": int(data.get("uniques") or 0),
+        "source": "GitHub traffic",
+        "live": True,
+    }
 
 
 def main():
@@ -78,7 +95,7 @@ def main():
     try:
         data["trampu"] = trampu_stats()
         data["trampu_ok"] = True
-    except Exception as e:  # keep last known numbers
+    except Exception as e:
         print("trampu.online unreachable:", e)
         data["trampu_ok"] = False
 
@@ -90,6 +107,13 @@ def main():
                 data["email"] = {**data.get("email", {}), **r, "source": "Resend", "live": True}
         except Exception as e:
             print("Resend unavailable, keeping snapshot:", e)
+
+    try:
+        r = github_views(os.environ.get("GITHUB_TOKEN", "").strip())
+        if r:
+            data["board"] = r
+    except Exception as e:
+        print("GitHub traffic unavailable, keeping last board snapshot:", e)
 
     data["updated_at"] = now.isoformat()
     DATA.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
