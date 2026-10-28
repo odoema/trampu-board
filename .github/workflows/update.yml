@@ -1,0 +1,53 @@
+# Refreshes the board's numbers every hour and publishes it to GitHub Pages.
+name: Update board
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: board
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch latest numbers
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: python3 scripts/update.py
+
+      - name: Save history
+        run: |
+          git config user.name "trampu-board"
+          git config user.email "trampu-board@users.noreply.github.com"
+          git add data.json history.json logo.png 2>/dev/null || git add data.json history.json
+          git diff --cached --quiet || git commit -m "data: hourly update" && git push
+
+      - name: Build site
+        run: |
+          mkdir -p _site
+          cp index.html data.json history.json _site/
+          [ -f logo.png ] && cp logo.png _site/ || true
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4
