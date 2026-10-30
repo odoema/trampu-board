@@ -127,7 +127,7 @@
       }
     ]
   },
-  "updated_at": "2026-10-30T00:59:01+00:00",
+  "updated_at": "2026-10-30T07:05:50+00:00",
   "marketing": {
     "campaigns": [
       {
@@ -177,8 +177,8 @@
         "subject": "",
         "cta_url": "",
         "broadcast_id": "4f901342-dba5-417f-8a9e-c75376fed73a",
-        "status": "scheduled",
-        "sent": false,
+        "status": "sent",
+        "sent": true,
         "sent_count": 0,
         "delivered": 0,
         "opened": 0,
