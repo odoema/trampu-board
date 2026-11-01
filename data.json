@@ -147,7 +147,7 @@
       }
     ]
   },
-  "updated_at": "2026-11-01T01:09:21+00:00",
+  "updated_at": "2026-11-01T07:31:47+00:00",
   "marketing": {
     "campaigns": [
       {
@@ -157,6 +157,20 @@
         "broadcast_id": "",
         "status": "ready",
         "sent": false,
+        "sent_count": 0,
+        "delivered": 0,
+        "opened": 0,
+        "clicked": 0,
+        "unique_clicked": 0,
+        "joined": 0
+      },
+      {
+        "id": "2026-11-02 \u2014 Makerere Entrepreneurship Expo Appreciation",
+        "subject": "",
+        "cta_url": "",
+        "broadcast_id": "eaeceb8e-39a4-44c8-9b1d-e689988db371",
+        "status": "sent",
+        "sent": true,
         "sent_count": 0,
         "delivered": 0,
         "opened": 0,
