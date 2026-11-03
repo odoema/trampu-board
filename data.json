@@ -167,7 +167,7 @@
       }
     ]
   },
-  "updated_at": "2026-11-03T15:06:47+00:00",
+  "updated_at": "2026-11-03T20:58:50+00:00",
   "marketing": {
     "campaigns": [
       {
@@ -177,6 +177,20 @@
         "broadcast_id": "",
         "status": "ready",
         "sent": false,
+        "sent_count": 0,
+        "delivered": 0,
+        "opened": 0,
+        "clicked": 0,
+        "unique_clicked": 0,
+        "joined": 0
+      },
+      {
+        "id": "TRAMPU 90-Day Growth \u2014 Launch 01",
+        "subject": "",
+        "cta_url": "",
+        "broadcast_id": "49b3767a-3eeb-417a-8e60-425f45dd9220",
+        "status": "sent",
+        "sent": true,
         "sent_count": 0,
         "delivered": 0,
         "opened": 0,
