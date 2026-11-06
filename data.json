@@ -127,7 +127,7 @@
       }
     ]
   },
-  "updated_at": "2026-11-06T01:32:25+00:00",
+  "updated_at": "2026-11-06T09:23:40+00:00",
   "marketing": {
     "campaigns": [
       {
@@ -137,6 +137,20 @@
         "broadcast_id": "",
         "status": "ready",
         "sent": false,
+        "sent_count": 0,
+        "delivered": 0,
+        "opened": 0,
+        "clicked": 0,
+        "unique_clicked": 0,
+        "joined": 0
+      },
+      {
+        "id": "TRAMPU 90-Day Growth \u2014 Shared Journey 03",
+        "subject": "",
+        "cta_url": "",
+        "broadcast_id": "b6a29bdf-ae37-4ac8-bf8d-4ca2fec2809a",
+        "status": "sent",
+        "sent": true,
         "sent_count": 0,
         "delivered": 0,
         "opened": 0,
