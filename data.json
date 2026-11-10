@@ -86,26 +86,6 @@
         "complaint_rate": 0
       },
       {
-        "broadcast_id": "5469231f-b8c9-4202-a311-e13a29bc948f",
-        "broadcast_name": "TRAMPU 90-Day Growth \u2014 How the Pilot Works 04",
-        "sent": 204,
-        "delivered": 203,
-        "bounced": 1,
-        "opened": 0,
-        "unique_opened": 0,
-        "clicked": 0,
-        "unique_clicked": 0,
-        "unsubscribed": 2,
-        "complained": 0,
-        "suppressed": 2,
-        "delivery_rate": 99.51,
-        "open_rate": 0,
-        "click_rate": 0,
-        "bounce_rate": 0.49,
-        "unsubscribe_rate": 0.99,
-        "complaint_rate": 0
-      },
-      {
         "broadcast_id": "b6a29bdf-ae37-4ac8-bf8d-4ca2fec2809a",
         "broadcast_name": "TRAMPU 90-Day Growth \u2014 Shared Journey 03",
         "sent": 204,
@@ -124,10 +104,30 @@
         "bounce_rate": 0.49,
         "unsubscribe_rate": 0,
         "complaint_rate": 0
+      },
+      {
+        "broadcast_id": "5469231f-b8c9-4202-a311-e13a29bc948f",
+        "broadcast_name": "TRAMPU 90-Day Growth \u2014 How the Pilot Works 04",
+        "sent": 204,
+        "delivered": 203,
+        "bounced": 1,
+        "opened": 0,
+        "unique_opened": 0,
+        "clicked": 0,
+        "unique_clicked": 0,
+        "unsubscribed": 2,
+        "complained": 0,
+        "suppressed": 2,
+        "delivery_rate": 99.51,
+        "open_rate": 0,
+        "click_rate": 0,
+        "bounce_rate": 0.49,
+        "unsubscribe_rate": 0.99,
+        "complaint_rate": 0
       }
     ]
   },
-  "updated_at": "2026-11-10T09:49:17+00:00",
+  "updated_at": "2026-11-10T17:49:55+00:00",
   "marketing": {
     "campaigns": [
       {
