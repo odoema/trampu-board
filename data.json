@@ -1,7 +1,7 @@
 {
   "trampu": {
     "roster": 278,
-    "joined": 24,
+    "joined": 25,
     "offers_open": 9,
     "trips_total": 9,
     "destinations": [
@@ -107,7 +107,7 @@
       }
     ]
   },
-  "updated_at": "2026-11-16T09:42:08+00:00",
+  "updated_at": "2026-11-16T20:28:46+00:00",
   "marketing": {
     "campaigns": [
       {
