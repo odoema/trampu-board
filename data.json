@@ -107,7 +107,7 @@
       }
     ]
   },
-  "updated_at": "2026-11-18T04:20:00+00:00",
+  "updated_at": "2026-11-18T13:57:40+00:00",
   "marketing": {
     "campaigns": [
       {
@@ -116,6 +116,20 @@
         "cta_url": "https://trampu.online/?utm_source=email&utm_medium=email&utm_campaign=2026-10-28-signup-fixed",
         "broadcast_id": "",
         "status": "ready",
+        "sent": false,
+        "sent_count": 0,
+        "delivered": 0,
+        "opened": 0,
+        "clicked": 0,
+        "unique_clicked": 0,
+        "joined": 0
+      },
+      {
+        "id": "TRAMPU 90-Day Growth \u2014 Plan the Shared Journey 08",
+        "subject": "",
+        "cta_url": "",
+        "broadcast_id": "9afcaff9-3503-49ec-ab07-c1af587edaa9",
+        "status": "scheduled",
         "sent": false,
         "sent_count": 0,
         "delivered": 0,
