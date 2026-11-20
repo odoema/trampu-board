@@ -87,7 +87,7 @@
       }
     ]
   },
-  "updated_at": "2026-11-20T03:14:14+00:00",
+  "updated_at": "2026-11-20T11:44:21+00:00",
   "marketing": {
     "campaigns": [
       {
@@ -105,12 +105,26 @@
         "joined": 0
       },
       {
+        "id": "TRAMPU 90-Day Growth \u2014 Share the Details Before You Travel 09",
+        "subject": "",
+        "cta_url": "",
+        "broadcast_id": "f9e7e9c6-881a-4309-9b94-9b16c7c2d839",
+        "status": "scheduled",
+        "sent": false,
+        "sent_count": 0,
+        "delivered": 0,
+        "opened": 0,
+        "clicked": 0,
+        "unique_clicked": 0,
+        "joined": 0
+      },
+      {
         "id": "TRAMPU 90-Day Growth \u2014 Plan the Shared Journey 08",
         "subject": "",
         "cta_url": "",
         "broadcast_id": "9afcaff9-3503-49ec-ab07-c1af587edaa9",
-        "status": "scheduled",
-        "sent": false,
+        "status": "sent",
+        "sent": true,
         "sent_count": 0,
         "delivered": 0,
         "opened": 0,
