@@ -107,7 +107,7 @@
       }
     ]
   },
-  "updated_at": "2026-11-25T02:28:03+00:00",
+  "updated_at": "2026-11-25T12:54:08+00:00",
   "marketing": {
     "campaigns": [
       {
@@ -125,12 +125,26 @@
         "joined": 0
       },
       {
+        "id": "TRAMPU 90-Day Growth \u2014 Share the Route 11",
+        "subject": "",
+        "cta_url": "",
+        "broadcast_id": "533d493c-b155-4899-a517-8d7feb76ff42",
+        "status": "scheduled",
+        "sent": false,
+        "sent_count": 0,
+        "delivered": 0,
+        "opened": 0,
+        "clicked": 0,
+        "unique_clicked": 0,
+        "joined": 0
+      },
+      {
         "id": "TRAMPU 90-Day Growth \u2014 Keep Shared Journey Plans Clear 10",
         "subject": "",
         "cta_url": "",
         "broadcast_id": "e66ae0ca-54e8-4c38-b245-88cd2aab68b8",
-        "status": "scheduled",
-        "sent": false,
+        "status": "sent",
+        "sent": true,
         "sent_count": 0,
         "delivered": 0,
         "opened": 0,
