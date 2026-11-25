@@ -34,14 +34,14 @@
     "sent": 397,
     "unique_opened": 0,
     "unique_clicked": 0,
-    "unsubscribed": 1,
+    "unsubscribed": 2,
     "complained": 0,
     "suppressed": 4,
     "delivery_rate": 98.74,
     "open_rate": 0.0,
     "click_rate": 0.0,
     "bounce_rate": 1.26,
-    "unsubscribe_rate": 0.26,
+    "unsubscribe_rate": 0.51,
     "complaint_rate": 0.0,
     "window_days": 7,
     "by_broadcast": [
@@ -84,10 +84,30 @@
         "bounce_rate": 1.01,
         "unsubscribe_rate": 0,
         "complaint_rate": 0
+      },
+      {
+        "broadcast_id": "b6a29bdf-ae37-4ac8-bf8d-4ca2fec2809a",
+        "broadcast_name": "TRAMPU 90-Day Growth \u2014 Shared Journey 03",
+        "sent": 0,
+        "delivered": 0,
+        "bounced": 0,
+        "opened": 0,
+        "unique_opened": 0,
+        "clicked": 0,
+        "unique_clicked": 0,
+        "unsubscribed": 1,
+        "complained": 0,
+        "suppressed": 0,
+        "delivery_rate": 0,
+        "open_rate": 0,
+        "click_rate": 0,
+        "bounce_rate": 0,
+        "unsubscribe_rate": 0,
+        "complaint_rate": 0
       }
     ]
   },
-  "updated_at": "2026-11-24T17:43:31+00:00",
+  "updated_at": "2026-11-25T02:28:03+00:00",
   "marketing": {
     "campaigns": [
       {
