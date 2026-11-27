@@ -34,14 +34,14 @@
     "sent": 594,
     "unique_opened": 0,
     "unique_clicked": 0,
-    "unsubscribed": 2,
+    "unsubscribed": 4,
     "complained": 0,
     "suppressed": 6,
     "delivery_rate": 98.65,
     "open_rate": 0.0,
     "click_rate": 0.0,
     "bounce_rate": 1.35,
-    "unsubscribe_rate": 0.34,
+    "unsubscribe_rate": 0.68,
     "complaint_rate": 0.0,
     "window_days": 7,
     "by_broadcast": [
@@ -95,14 +95,14 @@
         "unique_opened": 0,
         "clicked": 0,
         "unique_clicked": 0,
-        "unsubscribed": 0,
+        "unsubscribed": 2,
         "complained": 0,
         "suppressed": 2,
         "delivery_rate": 98.48,
         "open_rate": 0,
         "click_rate": 0,
         "bounce_rate": 1.52,
-        "unsubscribe_rate": 0,
+        "unsubscribe_rate": 1.03,
         "complaint_rate": 0
       },
       {
@@ -127,7 +127,7 @@
       }
     ]
   },
-  "updated_at": "2026-11-26T23:52:20+00:00",
+  "updated_at": "2026-11-27T08:30:49+00:00",
   "marketing": {
     "campaigns": [
       {
@@ -145,12 +145,26 @@
         "joined": 0
       },
       {
+        "id": "TRAMPU 90-Day Growth \u2014 Confirm the Shared Journey 12",
+        "subject": "",
+        "cta_url": "",
+        "broadcast_id": "246e6923-3b93-40af-8143-d7fc6131cf44",
+        "status": "scheduled",
+        "sent": false,
+        "sent_count": 0,
+        "delivered": 0,
+        "opened": 0,
+        "clicked": 0,
+        "unique_clicked": 0,
+        "joined": 0
+      },
+      {
         "id": "TRAMPU 90-Day Growth \u2014 Share the Route 11",
         "subject": "",
         "cta_url": "",
         "broadcast_id": "533d493c-b155-4899-a517-8d7feb76ff42",
-        "status": "scheduled",
-        "sent": false,
+        "status": "sent",
+        "sent": true,
         "sent_count": 0,
         "delivered": 0,
         "opened": 0,
